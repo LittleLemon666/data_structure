@@ -61,51 +61,6 @@ void ins(node *tree, long long x)
 	}
 }
 
-void preorder(node *tree)
-{
-	if(!tree||!(tree->parents)) return;
-	node *head=tree;
-	if(have_print)
-		printf(" %lld",head->data);
-	else
-	{
-		printf("%lld",head->data);
-		have_print=1;
-	}
-	preorder(head->left);
-	preorder(head->right);
-}
-
-void inorder(node *tree)
-{
-	if(!tree||!(tree->parents)) return;
-	node *head=tree;
-	inorder(head->left);
-	if(have_print)
-		printf(" %lld",head->data);
-	else
-	{
-		printf("%lld",head->data);
-		have_print=1;
-	}
-	inorder(head->right);
-}
-
-void postorder(node *tree)
-{
-	if(!tree||!(tree->parents)) return;
-	node *head=tree;
-	postorder(head->left);
-	postorder(head->right);
-	if(have_print)
-		printf(" %lld",head->data);
-	else
-	{
-		printf("%lld",head->data);
-		have_print=1;
-	}
-}
-
 void del(node *tree, long long x)
 {
 	node *head = tree;
@@ -278,6 +233,51 @@ void del(node *tree, long long x)
 	}
 }
 
+void preorder(node *tree)
+{
+	if(!tree||!(tree->parents)) return;
+	node *head=tree;
+	if(have_print)
+		printf(" %lld",head->data);
+	else
+	{
+		printf("%lld",head->data);
+		have_print=1;
+	}
+	preorder(head->left);
+	preorder(head->right);
+}
+
+void inorder(node *tree)
+{
+	if(!tree||!(tree->parents)) return;
+	node *head=tree;
+	inorder(head->left);
+	if(have_print)
+		printf(" %lld",head->data);
+	else
+	{
+		printf("%lld",head->data);
+		have_print=1;
+	}
+	inorder(head->right);
+}
+
+void postorder(node *tree)
+{
+	if(!tree||!(tree->parents)) return;
+	node *head=tree;
+	postorder(head->left);
+	postorder(head->right);
+	if(have_print)
+		printf(" %lld",head->data);
+	else
+	{
+		printf("%lld",head->data);
+		have_print=1;
+	}
+}
+
 int level(node *tree, int p)
 {
 	if(!tree||!(tree->parents)) return p-1;
@@ -335,19 +335,17 @@ int main()
 	root->left=NULL; //uninitialized is rather undefine than NULL
 	root->right=NULL;	
 	string s_in;
-	int i,len,sign,space,have_value;
+	int i,len,sign,have_value;
 	long long t;
 	while(getline(cin,s_in))
 	{
 		len=s_in.length();
-		space=0;
-		while(s_in[space]==' ') space++;
-		if(len>=space+3&&s_in[space+0]=='i'&&s_in[space+1]=='n'&&s_in[space+2]=='s')
+		if(len>=3&&s_in[0]=='i'&&s_in[1]=='n'&&s_in[2]=='s')
 		{
 			t=0;
 			sign=1;
 			have_value=0;
-			for(i=space+4;i<len;i++)
+			for(i=4;i<len;i++)
 			{
 				if(s_in[i]=='-')
 				{
@@ -371,7 +369,7 @@ int main()
 				}
 			}
 		}
-		else if(len>=space+3&&s_in[space+0]=='d'&&s_in[space+1]=='e'&&s_in[space+2]=='l')
+		else if(len>=3&&s_in[0]=='d')
 		{
 			t=0;
 			sign=1;
@@ -400,45 +398,45 @@ int main()
 				}
 			}
 		}
-		else if(len>=space+9&&s_in[space+0]=='p'&&s_in[space+1]=='o'&&s_in[space+2]=='s'&&s_in[space+3]=='t'&&s_in[space+4]=='o'&&s_in[space+5]=='r'&&s_in[space+6]=='d'&&s_in[space+7]=='e'&&s_in[space+8]=='r')
+		else if(len>=9&&s_in[0]=='p'&&s_in[1]=='o')
 		{
 			have_print=0;
 			postorder(tree);
 			if(have_print)
 				printf("\n");
 		}
-		else if(len>=space+8&&s_in[space+0]=='p'&&s_in[space+1]=='r'&&s_in[space+2]=='e'&&s_in[space+3]=='o'&&s_in[space+4]=='r'&&s_in[space+5]=='d'&&s_in[space+6]=='e'&&s_in[space+7]=='r')
+		else if(len>=8&&s_in[0]=='p'&&s_in[1]=='r')
 		{
 			have_print=0;
 			preorder(tree);
 			if(have_print)
 				printf("\n");
 		}
-		else if(len>=space+7&&s_in[space+0]=='i'&&s_in[space+1]=='n'&&s_in[space+2]=='o'&&s_in[space+3]=='r'&&s_in[space+4]=='d'&&s_in[space+5]=='e'&&s_in[space+6]=='r')
+		else if(len>=7&&s_in[0]=='i'&&s_in[1]=='n'&&s_in[2]=='o')
 		{
 			have_print=0;
 			inorder(tree);
 			if(have_print)
 				printf("\n");
 		}
-		else if(len>=space+5&&s_in[space+0]=='l'&&s_in[space+1]=='e'&&s_in[space+2]=='v'&&s_in[space+3]=='e'&&s_in[space+4]=='l')
+		else if(len>=5&&s_in[0]=='l')
 		{
 			printf("%d\n",level(tree,1));
 		}
-		else if(len>=space+4&&s_in[space+0]=='n'&&s_in[space+1]=='o'&&s_in[space+2]=='d'&&s_in[space+3]=='e')
+		else if(len>=4&&s_in[0]=='n')
 		{
 			printf("%d\n",node_num(tree));
 		}
-		else if(len>=space+12&&s_in[space+0]=='i'&&s_in[space+1]=='n'&&s_in[space+2]=='t'&&s_in[space+3]=='e'&&s_in[space+4]=='r'&&s_in[space+5]=='n'&&s_in[space+6]=='a'&&s_in[space+7]=='l'&&s_in[space+8]=='n'&&s_in[space+9]=='o'&&s_in[space+10]=='d'&&s_in[space+11]=='e')
+		else if(len>=12&&s_in[0]=='i'&&s_in[1]=='n'&&s_in[2]=='t')
 		{
 			printf("%d\n",internalnode(tree));
 		}
-		else if(len>=space+3&&s_in[space+0]=='m'&&s_in[space+1]=='i'&&s_in[space+2]=='n')
+		else if(len>=3&&s_in[0]=='m'&&s_in[1]=='i')
 		{
 			if(tree->parents!=NULL)
 				printf("%lld\n",min(tree));
 		}
-		else if(len>=space+3&&s_in[space+0]=='m'&&s_in[space+1]=='a'&&s_in[space+2]=='x')
+		else if(len>=3&&s_in[0]=='m'&&s_in[1]=='a')
 		{
 			if(tree->parents!=NULL)
 				printf("%lld\n",max(tree));
